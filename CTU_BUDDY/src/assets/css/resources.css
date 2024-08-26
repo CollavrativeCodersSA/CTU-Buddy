@@ -89,7 +89,7 @@ video {
 
 /* Resources */
 .resources {
-  margin-left: 1em;
+  margin: 3em 1em;
   display: flex;
   flex-wrap: wrap;
   gap: 2em;
@@ -126,4 +126,49 @@ video {
   justify-content: center;
   align-items: flex-end;
   margin: 0.5em;
+}
+
+/* Footer */
+footer {
+  margin-top: 3em;
+  background-color: rgb(176, 176, 179, 0.2);
+}
+footer small {
+  font: 400 16px "Inter", sans-serif;
+  display: flex;
+  justify-content: center;
+}
+.website-name-type {
+  display: flex;
+  justify-content: center;
+}
+.website-name-type h3 {
+  font: 400 28px "Poppins", sans-serif;
+  color: rgba(118, 117, 117, 1);
+  margin: 1em;
+}
+.website-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 1.5em;
+}
+.website-info h3 {
+  font: 400 24px "Inter", sans-serif;
+  margin-bottom: 1em;
+}
+.about-us p {
+  font: 400 16px "Inter", sans-serif;
+}
+.about-us {
+  width: 300px;
+}
+.website-info ul {
+  list-style-type: none;
+}
+.website-info li {
+  margin: 1em 0;
+  font: 400 16px "Inter", sans-serif;
+}
+.website-info i {
+  margin-right: 1em;
 }
