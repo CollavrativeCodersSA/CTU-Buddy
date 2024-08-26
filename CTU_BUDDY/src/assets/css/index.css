@@ -9,7 +9,7 @@
 /* Header Section */
 header {
   background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(src/assets/images/HomePageAssets/HeroSection.jpg);
+    url(/CTU_BUDDY/src/assets/images/HomePageAssets/HeroSection.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   height: 550px;
