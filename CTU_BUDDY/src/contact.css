@@ -2,6 +2,11 @@
     font-family: Nunito, sans-serif;
   }
   
+  footer small {
+    font: 400 16px "Inter", sans-serif;
+    display: flex;
+    justify-content: center;
+  }
   .contact_us_6 .text-blk {
     margin-top: 0px;
     margin-right: 0px;
