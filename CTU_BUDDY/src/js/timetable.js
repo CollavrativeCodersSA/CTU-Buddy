@@ -53,51 +53,11 @@ const course = {
     ],
   },
   project_management: {
-    monday: [
-      "PMG511",
-      "PMG511",
-      "PMG511",
-      "",
-      "PCM611",
-      "PCM611",
-      "PCM611",
-    ],
-    tuesday: [
-      "",
-      "",
-      "",
-      "",
-      "MAC611",
-      "MAC611",
-      "MAC611",
-    ],
-    wednesday: [
-      "BMG511",
-      "BMG611",
-      "BMG611",
-      "",
-      "IPM511",
-      "IPM511",
-      "IPM511",
-    ],
-    thursday: [
-      "",
-      "",
-      "",
-      "",
-      "FPM511",
-      "FPM511",
-      "FPM511",
-    ],
-    friday: [
-      "",
-      "",
-      "",
-      "SUPPORT",
-      "SUPPORT",
-      "",
-      "",
-    ],
+    monday: ["PMG511", "PMG511", "PMG511", "", "PCM611", "PCM611", "PCM611"],
+    tuesday: ["", "", "", "", "MAC611", "MAC611", "MAC611"],
+    wednesday: ["BMG511", "BMG611", "BMG611", "", "IPM511", "IPM511", "IPM511"],
+    thursday: ["", "", "", "", "FPM511", "FPM511", "FPM511"],
+    friday: ["", "", "", "SUPPORT", "SUPPORT", "", ""],
   },
   cyber_security: {
     monday: [
@@ -110,16 +70,7 @@ const course = {
       "Group Study",
       "",
     ],
-    tuesday: [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-    ],
+    tuesday: ["", "", "", "", "", "", "", ""],
     wednesday: [
       "AD632<br /><small>Practical</small>",
       "AD632<br /><small>Practical</small>",
@@ -204,3 +155,93 @@ const course = {
     ],
   },
 };
+const mySelect = document.getElementById("mySelect");
+const monday_courses = document.querySelectorAll(".monday-course");
+const tuesday_courses = document.querySelectorAll(".tuesday-course");
+const wednesday_courses = document.querySelectorAll(".wednesday-course");
+const thursday_courses = document.querySelectorAll(".thursday-course");
+const friday_courses = document.querySelectorAll(".friday-course");
+
+const total_modules = [
+  monday_courses,
+  tuesday_courses,
+  wednesday_courses,
+  thursday_courses,
+  friday_courses,
+];
+
+const programming_found = Object.values(course.programming_foundation);
+const proj_management = Object.values(course.project_management);
+const cybersec = Object.values(course.cyber_security);
+const it_support = Object.values(course.IT_technical_support);
+
+mySelect.addEventListener("change", () => {
+  if (mySelect.value === "Programming Foundation") {
+    let currentday = 0;
+    for (const courses of total_modules) {
+      let currentcourse = 0;
+      for (const module of courses) {
+        module.innerHTML = programming_found[currentday][currentcourse];
+        currentcourse++;
+      }
+      currentday++;
+    }
+  }
+  if (mySelect.value === "Project Management") {
+    let currentday = 0;
+    for (const courses of total_modules) {
+      let currentcourse = 0;
+
+      for (const module of courses) {
+        module.innerHTML = proj_management[currentday][currentcourse];
+        currentcourse++;
+      }
+      currentday++;
+    }
+  }
+  if (mySelect.value === "Cyber Security") {
+    let currentday = 0;
+    for (const courses of total_modules) {
+      let currentcourse = 0;
+
+      for (const module of courses) {
+        module.innerHTML = cybersec[currentday][currentcourse];
+        currentcourse++;
+      }
+      currentday++;
+    }
+  }
+
+  if (mySelect.value === "IT Technical Support") {
+    let currentday = 0;
+    for (const courses of total_modules) {
+      let currentcourse = 0;
+
+      for (const module of courses) {
+        module.innerHTML = it_support[currentday][currentcourse];
+        currentcourse++;
+      }
+      currentday++;
+    }
+  }
+  // for (const x of monday_courses) {
+  //   x.innerHTML = programming_found.monday[index];
+  //   index++;
+  // }
+  // for (const x of tuesday_courses) {
+  //   x.innerHTML = programming_found.tuesday[index];
+  //   index++;
+  // }
+  // for (const x of wednesday_courses) {
+  //   x.innerHTML = programming_found.wednesday[index];
+  //   index++;
+  // }
+
+  // if (mySelect.value === "Project Management") {
+  //   for (const x of monday_courses) {
+  //     console.log(x);
+  //     x.innerHTML = proj_management.monday[index];
+  //     index++;
+  //   }
+  // }
+});
