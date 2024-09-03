@@ -130,6 +130,10 @@ main h3 {
     text-decoration: underline;
 }
 
+header {
+    margin-bottom: 20px;
+  }
+
 #mySelect {
     width: 20%;
     padding: 10px;
