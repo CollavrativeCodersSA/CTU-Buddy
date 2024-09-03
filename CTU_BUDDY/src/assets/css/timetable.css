@@ -129,3 +129,32 @@ main h3 {
     color: #fff;
     text-decoration: underline;
 }
+
+#mySelect {
+    width: 20%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  #mySelect:hover {
+    border-color: #888;
+  }
+  
+  #mySelect:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.2); 
+  }
+  
+  #mySelect option {
+    padding: 10px; 
+  }
+  
