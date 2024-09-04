@@ -373,13 +373,27 @@ video {
 .resource-image {
   background-size: cover;
   background-position: center;
-  height: 180px;
+  height: 180px; /* Adjust height as needed */
 }
 
 .resource-card p {
   font-size: 15px;
   padding: 1em;
   text-align: center;
+}
+
+button {
+  display: block;
+  width: 80%;
+  margin: 1em auto;
+  padding: 0.75em;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 button {
@@ -406,6 +420,10 @@ button {
 
 .button-color-red {
   background-color: #ec221f;
+}
+.button-color-red a {
+  text-decoration: none;
+  color: white;
 }
 
 .button-color-red:hover {

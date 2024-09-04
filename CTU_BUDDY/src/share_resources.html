@@ -44,15 +44,43 @@
       <div class="modal-content">
         <h2>Select Resource Type</h2>
         <p>What type of resource would you like to add?</p>
-        <form action="#">
+        <form id="upload-form">
           <label>
-            <input type="radio" name="resource-type" value="video" />
+            <input
+              type="radio"
+              name="resource-type"
+              value="video"
+              id="video-option"
+            />
             Video
           </label>
           <label>
-            <input type="radio" name="resource-type" value="pdf" />
+            <input
+              type="radio"
+              name="resource-type"
+              value="pdf"
+              id="pdf-option"
+            />
             PDF
           </label>
+
+          <!-- Video Link Input -->
+          <div id="video-link-container" style="display: none">
+            <label for="video-link">YouTube Video Link:</label>
+            <input
+              type="text"
+              id="video-link"
+              name="video-link"
+              placeholder="Enter YouTube link"
+            />
+          </div>
+
+          <!-- File Upload Input -->
+          <div id="file-upload-container" style="display: none">
+            <label for="file-upload">Upload File:</label>
+            <input type="file" id="file-upload" name="file-upload" />
+          </div>
+
           <label for="resource-description">Description:</label>
           <textarea
             id="resource-description"
@@ -60,6 +88,7 @@
             rows="4"
             placeholder="Enter a brief description of the resource"
           ></textarea>
+
           <div class="modal-buttons">
             <a href="#" class="btn-cancel">Cancel</a>
             <button type="submit" class="btn-submit">Upload</button>
@@ -127,7 +156,7 @@
           Master the art of project management and lead successful projects with
           confidence.
         </p>
-        <button class="button-color-red">Watch Video</button>
+        <button class="button-color-red"><a href="">Watch Video</a></button>
       </div>
 
       <div class="resource-card">
@@ -155,7 +184,7 @@
           Gain the skills to troubleshoot and solve tech issues with our
           comprehensive Tech Support resource.
         </p>
-        <button class="button-color-red">Watch Video</button>
+        <button class="button-color-red"><a href="">Watch Video</a></button>
       </div>
     </section>
 
@@ -201,5 +230,6 @@
       </div>
       <small>CTU Buddy &copy; 2024 All rights reserved </small>
     </footer>
+    <script src="/CTU_BUDDY/src/js/resources.js"></script>
   </body>
 </html>
