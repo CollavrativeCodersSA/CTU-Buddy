@@ -77,6 +77,8 @@ nav li:hover {
 .signup-btn {
   background-color: #1fcdec;
   color: white;
+  margin-left: 1em;
+  text-decoration: none;
 }
 
 .signup-btn:hover {
@@ -90,6 +92,7 @@ nav li:hover {
   display: flex;
   align-items: center;
   gap: 0.5em;
+  text-decoration: none;
 }
 
 .upload-btn i {
@@ -166,7 +169,7 @@ textarea {
 .btn-cancel {
   background: #ccc;
   color: #333;
-  padding: 0.5em 1em;
+  padding: 1em;
   border-radius: 25px;
   text-decoration: none;
   font-size: 14px;
@@ -260,27 +263,6 @@ textarea {
   gap: 1em;
   margin-top: 2em;
   margin-right: 2em;
-}
-
-.signup-btn,
-.upload-btn {
-  padding: 0.75em 1.5em;
-  font-size: 16px;
-  font-weight: 600;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.signup-btn {
-  background-color: #1fcdec;
-  color: white;
-}
-
-.signup-btn:hover {
-  background-color: #17a2b8;
-  transform: translateY(-2px);
 }
 
 .upload-btn {
