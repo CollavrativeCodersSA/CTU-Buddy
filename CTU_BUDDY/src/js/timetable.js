@@ -224,24 +224,4 @@ mySelect.addEventListener("change", () => {
       currentday++;
     }
   }
-  // for (const x of monday_courses) {
-  //   x.innerHTML = programming_found.monday[index];
-  //   index++;
-  // }
-  // for (const x of tuesday_courses) {
-  //   x.innerHTML = programming_found.tuesday[index];
-  //   index++;
-  // }
-  // for (const x of wednesday_courses) {
-  //   x.innerHTML = programming_found.wednesday[index];
-  //   index++;
-  // }
-
-  // if (mySelect.value === "Project Management") {
-  //   for (const x of monday_courses) {
-  //     console.log(x);
-  //     x.innerHTML = proj_management.monday[index];
-  //     index++;
-  //   }
-  // }
 });
