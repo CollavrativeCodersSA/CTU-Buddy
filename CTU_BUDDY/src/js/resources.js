@@ -6,7 +6,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const fileUploadContainer = document.getElementById("file-upload-container");
   const videoLinkInput = document.getElementById("video-link");
   const resourceDescription = document.getElementById("resource-description");
-  const resourceSection = document.querySelector(".resources");
+  const resourceSection = document.getElementById("resources-list"); // Changed to match second snippet
+
+  // Load saved resources from localStorage
+  const savedResources = JSON.parse(localStorage.getItem("resources")) || [];
+  savedResources.forEach((resource, index) => {
+    const resourceCard = createResourceCard(resource, index);
+    resourceSection.appendChild(resourceCard);
+  });
 
   // Toggle input fields based on resource type
   document.querySelectorAll('input[name="resource-type"]').forEach((radio) => {
@@ -29,6 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
       'input[name="resource-type"]:checked'
     ).value;
     const description = resourceDescription.value;
+    let resourceLink = "";
+    let thumbnailUrl = "";
 
     if (type === "video") {
       const videoUrl = videoLinkInput.value;
@@ -37,20 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("Invalid YouTube URL");
         return;
       }
-
-      const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
-
-      createResourceCard(thumbnailUrl, description, videoUrl, "video");
+      resourceLink = videoUrl;
+      thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
     } else if (type === "pdf") {
       const fileInput = document.getElementById("file-upload");
       if (fileInput.files.length > 0) {
         const file = fileInput.files[0];
-        const fileUrl = URL.createObjectURL(file);
-        const thumbnailUrl = "assets/images/pdf-thumbnail.jpg"; // Placeholder thumbnail for PDF
-
-        createResourceCard(thumbnailUrl, description, fileUrl, "pdf");
+        resourceLink = URL.createObjectURL(file); // Generate URL for the file
+        thumbnailUrl = "assets/images/pdf-thumbnail.jpg"; // Placeholder thumbnail for PDF
       }
     }
+
+    const newResource = { resourceType: type, description, resourceLink };
+    saveResource(newResource);
+
+    // Update UI
+    const resourceCard = createResourceCard(
+      newResource,
+      getSavedResources().length - 1
+    );
+    resourceSection.appendChild(resourceCard);
 
     // Reset form
     uploadForm.reset();
@@ -59,21 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Function to create a resource card
-  function createResourceCard(imageUrl, description, link, type) {
+  function createResourceCard(resource, index) {
     const card = document.createElement("div");
     card.className = "resource-card";
 
     const imageDiv = document.createElement("div");
     imageDiv.className = "resource-image";
-    imageDiv.style.backgroundImage = `url(${imageUrl})`;
+    const thumbnailUrl =
+      resource.resourceType === "video"
+        ? `https://img.youtube.com/vi/${extractYouTubeID(
+            resource.resourceLink
+          )}/maxresdefault.jpg`
+        : "assets/images/pdf-thumbnail.jpg";
+    imageDiv.style.backgroundImage = `url(${thumbnailUrl})`;
     card.appendChild(imageDiv);
 
     const text = document.createElement("p");
-    text.textContent = description;
+    text.textContent = resource.description;
     card.appendChild(text);
 
     const button = document.createElement("button");
-    if (type === "video") {
+    if (resource.resourceType === "video") {
       button.className = "button-color-red"; // Red for video
       button.textContent = "Watch Video";
     } else {
@@ -82,11 +103,49 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     button.onclick = () => {
-      window.open(link, "_blank");
+      window.open(resource.resourceLink, "_blank");
     };
     card.appendChild(button);
 
-    resourceSection.appendChild(card);
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "button-color-red";
+    deleteButton.textContent = "Delete";
+    deleteButton.onclick = () => {
+      deleteResource(index);
+    };
+    card.appendChild(deleteButton);
+
+    return card;
+  }
+
+  // Save resource to localStorage
+  function saveResource(resource) {
+    const savedResources = getSavedResources();
+    savedResources.push(resource);
+    localStorage.setItem("resources", JSON.stringify(savedResources));
+  }
+
+  // Delete resource
+  function deleteResource(index) {
+    const savedResources = getSavedResources();
+    savedResources.splice(index, 1); // Remove the resource at the given index
+    localStorage.setItem("resources", JSON.stringify(savedResources));
+    updateResourceList();
+  }
+
+  // Update UI resource list
+  function updateResourceList() {
+    resourceSection.innerHTML = ""; // Clear the existing list
+    const savedResources = getSavedResources();
+    savedResources.forEach((resource, index) => {
+      const resourceCard = createResourceCard(resource, index);
+      resourceSection.appendChild(resourceCard);
+    });
+  }
+
+  // Get resources from localStorage
+  function getSavedResources() {
+    return JSON.parse(localStorage.getItem("resources")) || [];
   }
 
   // Extract YouTube ID function
