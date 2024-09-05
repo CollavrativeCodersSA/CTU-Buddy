@@ -124,7 +124,7 @@ const course = {
       "",
     ],
     wednesday: [
-      "Group Study<br /><small>ML1</small>",
+      "Group Study",
       "IBP412<br /><small>Practical</small>",
       "IBP412<br /><small>Practical</small>",
       "IBP412<br /><small>Practical</small>",

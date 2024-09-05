@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
-      createResourceCard(thumbnailUrl, description, videoUrl);
+      createResourceCard(thumbnailUrl, description, videoUrl, "video");
     } else if (type === "pdf") {
       const fileInput = document.getElementById("file-upload");
       if (fileInput.files.length > 0) {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const fileUrl = URL.createObjectURL(file);
         const thumbnailUrl = "assets/images/pdf-thumbnail.jpg"; // Placeholder thumbnail for PDF
 
-        createResourceCard(thumbnailUrl, description, fileUrl);
+        createResourceCard(thumbnailUrl, description, fileUrl, "pdf");
       }
     }
 
@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // Function to create a resource card
-  function createResourceCard(imageUrl, description, link = null) {
+  function createResourceCard(imageUrl, description, link, type) {
     const card = document.createElement("div");
     card.className = "resource-card";
 
@@ -73,14 +73,16 @@ document.addEventListener("DOMContentLoaded", () => {
     card.appendChild(text);
 
     const button = document.createElement("button");
-    button.className = link ? "button-color-blue" : "button-color-red";
-    button.textContent = link ? "Watch Video" : "Download File";
+    if (type === "video") {
+      button.className = "button-color-red"; // Red for video
+      button.textContent = "Watch Video";
+    } else {
+      button.className = "button-color-blue"; // Blue for PDF
+      button.textContent = "Download Article";
+    }
+
     button.onclick = () => {
-      if (link) {
-        window.open(link, "_blank");
-      } else {
-        window.open(fileUrl, "_blank");
-      }
+      window.open(link, "_blank");
     };
     card.appendChild(button);
 
