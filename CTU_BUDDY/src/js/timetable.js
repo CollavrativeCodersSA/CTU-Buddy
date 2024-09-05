@@ -107,7 +107,7 @@ const course = {
       "PS412<br /><small>Theory</small>",
       "PS412<br /><small>Theory</small>",
       "PS412<br /><small>Practical</small>",
-      "Group study<br /><small>ML1</small>",
+      "Group Study",
       "PS412<br /><small>Practical</small>",
       "PS412<br /><small>Theory</small>",
       "PS412<br /><small>Theory</small>",
@@ -124,11 +124,11 @@ const course = {
       "",
     ],
     wednesday: [
-      "Group study<br /><small>ML1</small>",
+      "Group Study<br /><small>ML1</small>",
       "IBP412<br /><small>Practical</small>",
       "IBP412<br /><small>Practical</small>",
       "IBP412<br /><small>Practical</small>",
-      "Group study<br /><small>ML1</small>",
+      "Group Study",
       "MDA412<br /><small>Theory</small>",
       "MDA412<br /><small>Theory</small>",
       "MDA412<br /><small>Practical</small>",
@@ -137,7 +137,7 @@ const course = {
       "MDA412<br /><small>Theory</small>",
       "MDA412<br /><small>Theory</small>",
       "MDA412<br /><small>Practical</small>",
-      "Group study<br /><small>ML1</small>",
+      "Group Study",
       "",
       "FDM411<br /><small>Theory</small>",
       "FDM411<br /><small>Theory</small>",
@@ -181,7 +181,13 @@ mySelect.addEventListener("change", () => {
     for (const courses of total_modules) {
       let currentcourse = 0;
       for (const module of courses) {
-        module.innerHTML = programming_found[currentday][currentcourse];
+        let course = programming_found[currentday][currentcourse];
+        module.innerHTML = course;
+        if (course === "Group Study") {
+          module.style.backgroundColor = "#feaf73";
+        } else if (course == "Research") {
+          module.style.backgroundColor = "#9ac2ff";
+        }
         currentcourse++;
       }
       currentday++;
@@ -193,7 +199,12 @@ mySelect.addEventListener("change", () => {
       let currentcourse = 0;
 
       for (const module of courses) {
-        module.innerHTML = proj_management[currentday][currentcourse];
+        let course = proj_management[currentday][currentcourse];
+        module.innerHTML = course;
+        module.style.backgroundColor = "#ffffff";
+        if (course === "SUPPORT") {
+          module.style.backgroundColor = "#feaf73";
+        }
         currentcourse++;
       }
       currentday++;
@@ -205,8 +216,16 @@ mySelect.addEventListener("change", () => {
       let currentcourse = 0;
 
       for (const module of courses) {
-        module.innerHTML = cybersec[currentday][currentcourse];
+        let course = cybersec[currentday][currentcourse];
+        module.innerHTML = course;
         currentcourse++;
+        module.style.backgroundColor = "#ffffff";
+        if (course === "Group Study") {
+          module.style.backgroundColor = "#feaf73";
+        }
+        if (course == "Research") {
+          module.style.backgroundColor = "#9ac2ff";
+        }
       }
       currentday++;
     }
@@ -218,8 +237,16 @@ mySelect.addEventListener("change", () => {
       let currentcourse = 0;
 
       for (const module of courses) {
-        module.innerHTML = it_support[currentday][currentcourse];
+        let course = it_support[currentday][currentcourse];
+        module.innerHTML = course;
         currentcourse++;
+        module.style.backgroundColor = "#ffffff";
+        if (course === "Group Study") {
+          module.style.backgroundColor = "#feaf73";
+        }
+        if (course == "Research") {
+          module.style.backgroundColor = "#9ac2ff";
+        }
       }
       currentday++;
     }
