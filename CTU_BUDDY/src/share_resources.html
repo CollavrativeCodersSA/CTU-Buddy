@@ -126,64 +126,8 @@
       </div>
     </section>
 
-    <section class="resources">
-      <div class="resource-card">
-        <div
-          class="resource-image"
-          style="
-            background-image: url(assets/images/ShareResourcesPageAssets/programmingbook.jpg);
-            background-size: contain;
-            background-repeat: no-repeat;
-          "
-        ></div>
-        <p>
-          Kickstart your coding journey with our beginner-friendly Programming
-          Foundation resource.
-        </p>
-        <button class="button-color-blue">Download Article</button>
-      </div>
-
-      <div class="resource-card">
-        <div
-          class="resource-image"
-          style="
-            background-image: url(assets/images/ShareResourcesPageAssets/projectmanagement.png);
-          "
-        ></div>
-        <p>
-          Master the art of project management and lead successful projects with
-          confidence.
-        </p>
-        <button class="button-color-red"><a href="">Watch Video</a></button>
-      </div>
-
-      <div class="resource-card">
-        <div
-          class="resource-image"
-          style="
-            background-image: url(assets/images/ShareResourcesPageAssets/cyberbook.jpeg);
-          "
-        ></div>
-        <p>
-          Protect your digital world by learning and mastering the essentials of
-          cybersecurity.
-        </p>
-        <button class="button-color-blue">Download Article</button>
-      </div>
-
-      <div class="resource-card">
-        <div
-          class="resource-image"
-          style="
-            background-image: url(assets/images/ShareResourcesPageAssets/techsupport.png);
-          "
-        ></div>
-        <p>
-          Gain the skills to troubleshoot and solve tech issues with our
-          comprehensive Tech Support resource.
-        </p>
-        <button class="button-color-red"><a href="">Watch Video</a></button>
-      </div>
+    <section class="resources" id="resources-list">
+      <!-- Resource cards will be added here dynamically -->
     </section>
 
     <footer>
@@ -228,6 +172,99 @@
       </div>
       <small>CTU Buddy &copy; 2024 All rights reserved </small>
     </footer>
-    <script src="/CTU_BUDDY/src/js/resources.js"></script>
+    <script>
+      // Load saved resources from localStorage
+      document.addEventListener('DOMContentLoaded', function () {
+        const resourcesList = document.getElementById('resources-list');
+        const savedResources = JSON.parse(localStorage.getItem('resources')) || [];
+
+        savedResources.forEach((resource, index) => {
+          const resourceCard = createResourceCard(resource, index);
+          resourcesList.appendChild(resourceCard);
+        });
+      });
+
+      // Save resource on upload
+      document.getElementById('upload-form').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const resourceType = document.querySelector('input[name="resource-type"]:checked').value;
+        const description = document.getElementById('resource-description').value;
+        let resourceLink = '';
+
+        if (resourceType === 'video') {
+          resourceLink = document.getElementById('video-link').value;
+        } else if (resourceType === 'pdf') {
+          resourceLink = document.getElementById('file-upload').files[0].name; // Just saving the filename for now
+        }
+
+        const newResource = { resourceType, description, resourceLink };
+        saveResource(newResource);
+
+        // Update UI
+        const resourceCard = createResourceCard(newResource, getSavedResources().length - 1);
+        document.getElementById('resources-list').appendChild(resourceCard);
+
+        // Clear form and close modal
+        document.getElementById('upload-form').reset();
+        document.getElementById('video-link-container').style.display = 'none';
+        document.getElementById('file-upload-container').style.display = 'none';
+      });
+
+      // Create resource card
+      function createResourceCard(resource, index) {
+        const resourceCard = document.createElement('div');
+        resourceCard.classList.add('resource-card');
+        resourceCard.innerHTML = `
+          <p>${resource.description}</p>
+          <button class="button-color-blue">
+            ${resource.resourceType === 'video' ? 'Watch Video' : 'Download PDF'}
+          </button>
+          <button class="button-color-red" onclick="deleteResource(${index})">Delete</button>
+        `;
+        return resourceCard;
+      }
+
+      // Save resource to localStorage
+      function saveResource(resource) {
+        const savedResources = getSavedResources();
+        savedResources.push(resource);
+        localStorage.setItem('resources', JSON.stringify(savedResources));
+      }
+
+      // Delete resource
+      function deleteResource(index) {
+        const savedResources = getSavedResources();
+        savedResources.splice(index, 1); // Remove the resource at the given index
+        localStorage.setItem('resources', JSON.stringify(savedResources));
+        updateResourceList();
+      }
+
+      // Update UI resource list
+      function updateResourceList() {
+        const resourcesList = document.getElementById('resources-list');
+        resourcesList.innerHTML = ''; // Clear the existing list
+        const savedResources = getSavedResources();
+        savedResources.forEach((resource, index) => {
+          const resourceCard = createResourceCard(resource, index);
+          resourcesList.appendChild(resourceCard);
+        });
+      }
+
+      // Get resources from localStorage
+      function getSavedResources() {
+        return JSON.parse(localStorage.getItem('resources')) || [];
+      }
+
+      // Show video link input or file upload input based on selected type
+      document.getElementById('video-option').addEventListener('change', function () {
+        document.getElementById('video-link-container').style.display = 'block';
+        document.getElementById('file-upload-container').style.display = 'none';
+      });
+
+      document.getElementById('pdf-option').addEventListener('change', function () {
+        document.getElementById('video-link-container').style.display = 'none';
+        document.getElementById('file-upload-container').style.display = 'block';
+      });
+    </script>
   </body>
 </html>
